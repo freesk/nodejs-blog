@@ -1,0 +1,40 @@
+{
+  "name": "nodejs-blog",
+  "version": "1.0.0",
+  "main": "node ./bin/www",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "engines": {
+    "node": "6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://freesk@bitbucket.org/freesk/nodejs-blog.git"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "~1.15.1",
+    "connect-flash": "*",
+    "connect-multiparty": "^2.0.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "jade": "~1.11.0",
+    "moment": "^2.14.1",
+    "mongodb": "*",
+    "mongoose": "*",
+    "morgan": "~1.7.0",
+    "nodemailer": "^2.5.0",
+    "nodemailer-smtp-transport": "^2.6.0",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "request": "^2.74.0",
+    "serve-favicon": "~2.3.0",
+    "striptags": "^3.1.1"
+  }
+}

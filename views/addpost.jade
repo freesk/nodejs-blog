@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  h1= title
+  //- code.formattedDebug= user
+  
+  ul.error
+    if errors
+      each error in errors
+        li.alert.alert-danger #{error.msg}
+        
+  form(method='post', action='#{action}', enctype="multipart/form-data")
+    .form-group
+      label Title:
+      input.form-control(name='title', type='text', value='#{formTitle ? formTitle : ""}')
+    
+    .form-group
+      label Category:
+      select.form-control(name='category' id='category')
+        option(disabled selected value='default') –
+        // list all available categories from db
+        each category in categories
+          option(value="#{category.title}" selected=category.title == formCategory) #{category.title}
+        
+    .form-group
+      label Body:
+      textarea.form-control(name='body') #{formBody ? formBody : ""}
+    
+    .form-group
+      label Description:
+      textarea.form-control(name='description') #{formDescription ? formDescription : ""}
+      
+    .form-group
+      label Key Words:
+      textarea.form-control(name='keywords') #{formKeywords ? formKeywords : ""}
+          
+    .form-group
+      label Main Image:
+      input(name='mainimage', type='file')
+
+    .btn-toolbar
+      .btn-group
+        input.btn.btn-success.m-l-1(name='submit', type='submit', value='Save')
+      .btn-group
+        a.btn.btn-danger(href='/blog') Cancel
+
+    script(src='/ckeditor/ckeditor.js')
+    script
+      | CKEDITOR.replace('body');

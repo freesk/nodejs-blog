@@ -1,0 +1,6 @@
+{
+  "name": "my-blog",
+  "description": "Blog website",
+  "repository": "https://freesk@bitbucket.org/freesk/my-blog.git",
+  "keywords": ["node", "express", "mongodb", "mongoose", "blog"]
+}

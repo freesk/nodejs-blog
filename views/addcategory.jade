@@ -1,0 +1,33 @@
+extends layout 
+
+block content
+  h1= title
+  //- code.formattedDebug= action
+  
+  ul.error
+    if errors
+      each error in errors
+        li.alert.alert-danger #{error.msg}
+  
+  form(method='post', action='#{action}', enctype="multipart/form-data")
+    .form-group
+      label Title:
+      input.form-control(name='title', type='text', value='#{formTitle ? formTitle : ""}')
+      
+    .form-group
+      label Description:
+      textarea.form-control(name='description') #{formDescription ? formDescription : ""}
+      
+    .form-group
+      label Key Words:
+      textarea.form-control(name='keywords') #{formKeywords ? formKeywords : ""}
+          
+    .form-group
+      label Main Image:
+      input(name='mainimage', type='file') 
+      
+    .btn-toolbar
+      .btn-group
+        input.btn.btn-success.m-l-1(name='submit', type='submit', value='Save')
+      .btn-group
+        a.btn.btn-danger(href='/blog') Cancel   

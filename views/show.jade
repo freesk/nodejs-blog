@@ -1,0 +1,85 @@
+extends layout
+
+block content
+  .post
+    h1= post.title
+
+    ul.error
+      if errors
+        each error in errors
+          li.alert.alert-danger #{error.msg}
+
+    p.post
+      span Posted in
+      a(href='/blog/categories/show/#{post.category.title}' class='category-link') #{post.category.title}
+      span by #{post.author.username} on #{moment(post.date).format("MM-DD-YYYY")}
+    if post.image
+      img(src='#{post.image}' style='max-width:100%;').img-rounded
+
+    p!=post.body
+    br
+    //- code.formattedDebug= user
+    //- br
+    //- code.formattedDebug= post
+    if user
+      if user.username == post.author.username
+        .btn-toolbar
+          .btn-group
+            a(href='/blog/posts/edit/#{post._id}').btn.btn-default.btn-lg Edit
+          .btn-group
+            a(href='/blog/posts/delete/#{post._id}').btn.btn-danger.btn-lg Delete
+    br
+    hr
+    if post.comments
+      h3 Comments
+      each comment in post.comments
+        .comment
+          //- code.formattedDebug= comment
+          if user
+            if user.username == comment.author.username
+              a(href='/blog/posts/#{post._id}/comments/delete/' + comment._id)
+                i.fa.fa-times-circle(aria-hidden="true")
+          p.info #{comment.author.username}
+            span on #{moment(comment.date).format("MM-DD-YYYY")}
+          p.comment-text #{comment.body}
+      br
+    h3 Add Comment
+
+    form.comment-form(method='post', action='/blog/posts/comments/add')
+      input(name='postid', type='hidden', value='#{post._id}')
+      .form-group
+        textarea.form-control(name='body', id='body')
+      br
+      input.btn.btn-default(name='submit', type='submit', value='Add Comment')
+
+    style.
+      .comment {
+        position: relative;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+      }
+      .post .info {
+        background-color: #c6dbfb;
+        padding: 4px 12px;
+        color: #fff;
+      }
+      .comment-text {
+        padding: 2px 10px;
+      }
+      .comment .fa {
+        position: absolute;
+        cursor: pointer;
+        right: 5px;
+        top: 3px;
+        color: #fff;
+        font-size:22px;
+      }
+      .comment .fa:hover {
+        color: #4971a5;
+      }
+      .category-link {
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+      }

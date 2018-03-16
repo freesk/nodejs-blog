@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+  include ./head.jade
+  body
+    include ./nav.jade
+    //- code.formattedDebug= user
+    .container
+      != messages()
+      block content
+  
+  include ./footer.jade
+  

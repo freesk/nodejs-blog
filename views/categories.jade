@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  h1= title
+  //- code.formattedDebug= categories.length
+  if categories.length > 0
+    div.row
+      each category in categories
+        .col-xs-12.col-md-4
+          .category
+            if category.image
+              img(src='#{category.image}').img-circle
+            else
+              img(src='/images/undefined-category.png').img-circle
+            h1.title
+              a(href='/blog/categories/show/#{category.title}')= category.title
+            if user
+              .btn-toolbar
+                .btn-group
+                  a.btn.btn-default(href="/blog/categories/edit/#{category.title}") Edit
+                .btn-group
+                  a.btn.btn-danger(href="/blog/categories/delete/#{category.title}") Delete
+
+  else
+    p There are no categories to display
+
+  style.
+    .img-circle {
+      max-width: 350px;
+      width: 90%;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+    }
+    .btn-toolbar {
+      display: inline-block;
+    }
+    .title a {
+      margin-bottom: 20px;
+    }
+    .category {
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+    }
